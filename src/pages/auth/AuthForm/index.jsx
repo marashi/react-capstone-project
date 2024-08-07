@@ -10,8 +10,6 @@ const AuthForm = ({ fields, submitButtonText }) => {
     return initialState;
   });
 
-  console.log(values);
-
   return (
     <div className="flex flex-col bg-white border border-slate-200 rounded-lg m-4 p-4 font-lato">
       {fields.map((field) => {
