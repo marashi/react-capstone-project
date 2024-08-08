@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import FormContainer from "./FormContainer";
+import * as userService from "services/user";
 
 const SignUpPage = () => {
+  const [error, setError] = useState("");
+
   return (
     <FormContainer>
+      <div className="text-red-700 my-1 text-sm font-loto">{error}</div>
       <AuthForm
         fields={[
           {
@@ -21,6 +26,32 @@ const SignUpPage = () => {
           },
         ]}
         submitButtonText="create an account"
+        onSubmit={async (values) => {
+          if (values.username.length < 4) {
+            setError("Username too short");
+            return;
+          }
+          if (values.password.length < 4) {
+            setError("password too short");
+            return;
+          }
+          if (values.password !== values["confirm password"]) {
+            setError("passwords do not match");
+            return;
+          }
+          const response = await userService.createUser({
+            username: values.username,
+            password: values.password,
+          });
+          console.log(response.status);
+          if (response.status === 201) {
+            console.log("User created successfully");
+            setError("");
+          } else {
+            const data = await response.json();
+            setError(data?.error ?? "Unknown error");
+          }
+        }}
       />
       <Link to="/" className="text-green-600 text-sm underline">
         Sign-in
