@@ -12,8 +12,6 @@ const SignInPage = () => {
   const location = useLocation();
   const sessionContext = useContext(SessionContext);
 
-  console.log(location);
-
   return (
     <RedirectToPlantsIfSignedIn>
       <FormContainer>
@@ -41,7 +39,6 @@ const SignInPage = () => {
               password: values.password,
             });
             if (response.status === 201) {
-              console.log("Sign in successful");
               const data = await response.json();
               sessionContext.signIn(data["capstone_session_token"]);
               setError("");

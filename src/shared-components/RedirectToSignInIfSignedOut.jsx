@@ -6,8 +6,6 @@ const RedirectToSignInIfSignedOut = ({ children }) => {
   const { username } = useContext(SessionContext);
   const navigate = useNavigate();
 
-  console.log(username);
-
   useEffect(() => {
     if (username === null) {
       navigate("/");

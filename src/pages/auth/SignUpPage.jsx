@@ -44,7 +44,6 @@ const SignUpPage = () => {
             username: values.username,
             password: values.password,
           });
-          console.log(response.status);
           if (response.status === 201) {
             setError("");
             navigate("/", {
