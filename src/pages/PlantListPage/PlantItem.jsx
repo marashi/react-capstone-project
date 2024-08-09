@@ -1,29 +1,20 @@
 import clsx from "clsx";
 import { useState } from "react";
-
-const POT_COLORS = {
-  stone: "bg-stone-200",
-  slate: "bg-slate-300",
-  sky: "bg-sky-700",
-  black: "bg-gray-600",
-  white: "bg-gray-50",
-  amber: "bg-amber-600",
-};
-
-const getRandomElement = (array) => Math.floor(Math.random() * array.length);
+import { Link } from "react-router-dom";
+import { getRandomIdx, POT_COLORS } from "shared-components/util";
 
 const PlantItem = ({ plant }) => {
-  const [imageIdx, setImageIdx] = useState(() =>
-    getRandomElement(plant.images)
-  );
+  const [imageIdx, setImageIdx] = useState(() => getRandomIdx(plant.images));
 
   return (
     <div className="p-4 rounded-lg my-8 mx-4">
-      <img
-        src={plant.images[imageIdx]?.src}
-        alt={plant.name}
-        className="w-[240px] h-[320px] object-cover rounded-lg"
-      />
+      <Link to={`/plants/${plant.id}`}>
+        <img
+          src={plant.images[imageIdx]?.src}
+          alt={plant.name}
+          className="w-[240px] h-[320px] object-cover rounded-lg"
+        />
+      </Link>
       <div className="flex justify-between my-3">
         <div className="text-xl font-playfair text-emerald-700">
           {plant.name}
