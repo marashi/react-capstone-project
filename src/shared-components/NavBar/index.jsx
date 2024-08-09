@@ -22,13 +22,13 @@ const NavBar = () => {
           <div className="relative min-w-32">
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="text-emerald-200"
+              className="text-emerald-100"
             >
               <i className="fa-solid fa-user mr-2"></i>
               {sessionContext.username}
             </button>
             {userMenuOpen && (
-              <div className=" bg-emerald-50 rounded-lg absolute top-6 left-0 p-2 min-w-28 ">
+              <div className="bg-emerald-50 rounded-lg absolute top-6 left-0 p-2 min-w-28 ">
                 <button
                   onClick={() => sessionContext.signOut()}
                   className="text-slate-500 hover:text-emerald-800"
