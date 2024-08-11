@@ -1,8 +1,10 @@
 import { useState } from "react";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+import { getRandomIdx } from "shared-components/util";
 import BenefitBox from "./BenefitBox";
 import PlantHeading from "./PlantHeading";
 import PlantPurchaseOptions from "./PlantPurchaseOptions";
-import { getRandomIdx } from "shared-components/util";
 
 const PlantInfoSection = ({ plant }) => {
   const [imageIdx, setImageIdx] = useState(() => getRandomIdx(plant.images));
@@ -12,11 +14,14 @@ const PlantInfoSection = ({ plant }) => {
         <PlantHeading plant={plant} />
       </div>
       <div className="flex flex-col flex-1">
-        <img
-          src={plant.images[imageIdx].src}
-          alt={plant.name}
-          className="rounded-lg"
-        />
+        <Zoom>
+          <img
+            src={plant.images[imageIdx].src}
+            alt={plant.name}
+            className="rounded-lg"
+          />
+        </Zoom>
+
         <div className="flex justify-between mt-4">
           <BenefitBox
             icon="fa-regular fa-check-circle"
