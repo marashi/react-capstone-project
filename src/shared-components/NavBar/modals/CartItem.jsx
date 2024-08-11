@@ -1,6 +1,8 @@
-const CartItem = ({ item }) => {
+import * as cartService from "services/cart";
+
+const CartItem = ({ item, fetchCart }) => {
   return (
-    <div className="flex mx-6 my-8">
+    <div className="flex">
       <img
         src={item.image_src}
         alt={item.plant_name}
@@ -20,8 +22,20 @@ const CartItem = ({ item }) => {
             {item.quantity}
           </div>
         </div>
-        <div className="text-slate-500">
-          ${item.price_per_unit * item.quantity}
+        <div className="flex flex-col justify-between items-end">
+          <div className="text-slate-500">
+            ${item.price_per_unit * item.quantity}
+          </div>
+          <button
+            onClick={async () => {
+              cartService.removeItemFromCart(item.id);
+              fetchCart();
+            }}
+            className="text-sm text-slate-400 hover:text-red-800"
+          >
+            <i className="fa-regular fa-trash-can mr-1 text-base"></i>
+            Remove
+          </button>
         </div>
       </div>
     </div>
