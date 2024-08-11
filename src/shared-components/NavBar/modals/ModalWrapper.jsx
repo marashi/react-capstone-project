@@ -8,7 +8,7 @@ const ModalWrapper = ({ children, isOpen, onCloseClick }) => {
     isOpen && (
       <RemoveScroll>
         <div
-          className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm flex items-start justify-end font-lato"
+          className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm flex items-start justify-end font-lato z-20"
           ref={backgroundDivRef}
           onClick={(e) => {
             if (backgroundDivRef.current === e.target) {

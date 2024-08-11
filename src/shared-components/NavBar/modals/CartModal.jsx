@@ -3,8 +3,9 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import * as cartService from "services/cart";
 import LoadingSpinner from "../LoadingSpinner";
 import CartItem from "./CartItem";
+import { motion } from "framer-motion";
 
-const CartModal = ({}) => {
+const CartModal = () => {
   const { username } = useContext(SessionContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,12 @@ const CartModal = ({}) => {
   }
 
   return (
-    <div className="bg-white h-screen w-full max-w-lg flex flex-col">
+    <motion.div
+      initial={{ translateX: "100%" }}
+      animate={{ translateX: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white h-screen w-full max-w-lg flex flex-col"
+    >
       <div className="bg-emerald-800 text-white font-playfair text-center py-8 text-3xl shadow-md relative">
         {` ${username}'s Cart`}
       </div>
@@ -68,7 +74,7 @@ const CartModal = ({}) => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 export default CartModal;
