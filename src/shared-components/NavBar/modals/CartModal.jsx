@@ -1,11 +1,10 @@
-import { RemoveScroll } from "react-remove-scroll";
 import SessionContext from "contexts/SessionContext";
 import { useCallback, useContext, useEffect, useState } from "react";
 import * as cartService from "services/cart";
 import LoadingSpinner from "../LoadingSpinner";
 import CartItem from "./CartItem";
 
-const CartModal = ({ setCartOpen }) => {
+const CartModal = ({}) => {
   const { username } = useContext(SessionContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,55 +30,45 @@ const CartModal = ({ setCartOpen }) => {
   }
 
   return (
-    <RemoveScroll>
-      <div className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm flex justify-end font-lato">
-        <div className="bg-white h-screen w-full max-w-lg flex flex-col">
-          <div className="bg-emerald-800 text-white font-playfair text-center py-8 text-3xl shadow-md relative">
-            {` ${username}'s Cart`}
-            <button
-              className="absolute top-8 right-8  text-green-200"
-              onClick={() => setCartOpen(false)}
-            >
-              <i className="fa-regular fa-circle-xmark  text-3xl"></i>
-            </button>
-          </div>
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <div className="flex flex-col justify-between flex-1 overflow-y-scroll">
-              <div>
-                {items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="border-t border-slate-200 first:border-none mx-8 py-6"
-                  >
-                    <CartItem item={item} fetchCart={fetchCart}></CartItem>
-                  </div>
-                ))}
+    <div className="bg-white h-screen w-full max-w-lg flex flex-col">
+      <div className="bg-emerald-800 text-white font-playfair text-center py-8 text-3xl shadow-md relative">
+        {` ${username}'s Cart`}
+      </div>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="flex flex-col justify-between flex-1 overflow-y-scroll">
+          <div>
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="border-t border-slate-200 first:border-none mx-8 py-6"
+              >
+                <CartItem item={item} fetchCart={fetchCart}></CartItem>
               </div>
-              <div className="border-t border-slate-200 flex flex-col justify-center m-4">
-                <div className="flex justify-between my-4 text-slate-500">
-                  <div>{totalItems} items</div>
-                  <div>
-                    Subtotal{" "}
-                    <span className="text-lg text-slate-600">${subTotal}</span>
-                  </div>
-                </div>
-                <button
-                  onClick={() =>
-                    alert("This app is not a real plant selling site :)")
-                  }
-                  className="bg-emerald-700 text-white py-3 rounded-full flex justify-center items-center text-lg "
-                >
-                  <i className="fa-solid fa-arrow-right-to-bracket mr-1 text-2xl"></i>
-                  Checkout
-                </button>
+            ))}
+          </div>
+          <div className="border-t border-slate-200 flex flex-col justify-center m-4">
+            <div className="flex justify-between my-4 text-slate-500">
+              <div>{totalItems} items</div>
+              <div>
+                Subtotal{" "}
+                <span className="text-lg text-slate-600">${subTotal}</span>
               </div>
             </div>
-          )}
+            <button
+              onClick={() =>
+                alert("This app is not a real plant selling site :)")
+              }
+              className="bg-emerald-700 text-white py-3 rounded-full flex justify-center items-center text-lg "
+            >
+              <i className="fa-solid fa-arrow-right-to-bracket mr-1 text-2xl"></i>
+              Checkout
+            </button>
+          </div>
         </div>
-      </div>
-    </RemoveScroll>
+      )}
+    </div>
   );
 };
 export default CartModal;
